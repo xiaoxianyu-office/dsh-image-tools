@@ -50,10 +50,10 @@ agent-default-model:
 
 3. 识图 token：`~/.dsh/.credentials.yaml` 中 `XIAOMI_API_KEY`
 
-安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.3）：
+安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.4）：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.3
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.4
 ```
 
 安装后**重启 dsh web 服务**生效（插件代码在进程内）。
@@ -63,7 +63,7 @@ dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.3
 升级 = 重复 `add` 并指定**最新的 tag**，不要用 update 选择 Git 引用：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.3
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.4
 ```
 
 ## 卸载
