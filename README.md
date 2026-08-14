@@ -50,10 +50,10 @@ agent-default-model:
 
 3. 识图 token：`~/.dsh/.credentials.yaml` 中 `XIAOMI_API_KEY`
 
-安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.1）：
+安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.2）：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.1
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.2
 ```
 
 安装后**重启 dsh web 服务**生效（插件代码在进程内）。
@@ -63,7 +63,7 @@ dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.1
 升级 = 重复 `add` 并指定**最新的 tag**，不要用 update 选择 Git 引用：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.1
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.2
 ```
 
 ## 卸载
@@ -85,7 +85,8 @@ dsh plugin --profile web remove @dsh-external/dsh-image-tools
   原生多模态会话的图片直接进入模型，不做任何处理；
 - **image_recognize**：必须传针对性读取任务（想从图中获得什么）；同一图片路径再次调用
   自动衔接此前问答，可持续追问；
-- 视觉子 agent（xiaomi/mimo-v2.5，无声明）不受 read_image 禁用影响。
+- 视觉子 agent（xiaomi/mimo-v2.5，无声明）不受 read_image 禁用影响；
+- **识图输出严格规范**（v0.3.2）：识图子 agent 只回答任务问题，位置给像素坐标或明确方位、颜色给 #RRGGBB 色值，禁止模糊词（偏上/大概/差不多/看起来等），图中没有的内容回答「图中未出现」，不确定回答「无法从图中确认」并说明原因。
 
 ## 安装向导与故障自检（v0.3.0）
 
