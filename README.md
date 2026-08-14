@@ -53,7 +53,7 @@ agent-default-model:
 安装：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.2.0
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.0
 ```
 
 安装后**重启 dsh web 服务**生效（插件代码在进程内）。
@@ -63,7 +63,7 @@ dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.2.0
 重复 add 并指定新 tag，不要用 update 选择 Git 引用：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.2.1
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.1
 ```
 
 ## 卸载
@@ -74,6 +74,7 @@ dsh plugin --profile web remove @dsh-external/dsh-image-tools
 
 卸载后重启服务。插件层（依赖、node_modules、组合行）无残留；
 `settings.yaml` 里的路由与默认模型属于设置层，需手动还原（见上「前置条件」反向操作）。
+另外 `~/.dsh/image-tools-state.json`（向导完成标记）为可选清理项。
 
 ## 行为
 
@@ -85,6 +86,16 @@ dsh plugin --profile web remove @dsh-external/dsh-image-tools
 - **image_recognize**：必须传针对性读取任务（想从图中获得什么）；同一图片路径再次调用
   自动衔接此前问答，可持续追问；
 - 视觉子 agent（xiaomi/mimo-v2.5，无声明）不受 read_image 禁用影响。
+
+## 安装向导与故障自检（v0.3.0）
+
+- **首次安装向导**：升级到 v0.3.0 后重启，页面自动弹出配置向导（shell.overlay 浮层）：
+  只读检查识图路由 / API Key / 模型图片能力，可一键「测试识图连通性」
+  （真实调用一次识图模型），点「完成，开始使用」后不再弹出（状态存 `~/.dsh/image-tools-state.json`）；
+- **故障自动自检**：`read_image` 被拦截、`image_recognize` 失败、图片落盘失败时，
+  页面自动弹出自检面板：显示错误原因 + 一键运行自检（路由 / Key / 模型能力）+
+  重新测试连通性；
+- 以上 host 接口均做**回环地址 + Host 精确校验**，拒绝本机其他进程调用。
 
 ## 配置
 
