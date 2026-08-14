@@ -1,7 +1,7 @@
 {
   "name": "@dsh-external/dsh-image-tools",
-  "description": "Chat-image bridge and recognition tool for text-only main models on DeepSeek Harness",
-  "version": "0.1.0",
+  "description": "Dynamic chat-image bridge and recognition tool for text-only models on DeepSeek Harness",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
