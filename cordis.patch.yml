@@ -1,0 +1,11 @@
+# dsh-image-tools bundle patch: mounts this package's plugin row.
+# 被 dsh plugin --profile web add 安装后自动层叠进 web profile 组合。
+- insert:
+    - id: image-tools
+      name: '@dsh-external/dsh-image-tools'
+      config:
+        stripProviders:
+          - main
+        uploadsDir: uploads
+        provider: xiaomi
+        model: mimo-v2.5
