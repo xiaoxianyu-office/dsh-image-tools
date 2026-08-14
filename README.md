@@ -50,10 +50,10 @@ agent-default-model:
 
 3. 识图 token：`~/.dsh/.credentials.yaml` 中 `XIAOMI_API_KEY`
 
-安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.5）：
+安装（**始终使用最新发布 tag**，见仓库 Releases；示例为当前最新 v0.3.6）：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.5
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.6
 ```
 
 安装后**重启 dsh web 服务**生效（插件代码在进程内）。
@@ -63,7 +63,7 @@ dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.5
 升级 = 重复 `add` 并指定**最新的 tag**，不要用 update 选择 Git 引用：
 
 ```bash
-dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.5
+dsh plugin --profile web add -w github:xiaoxianyu-office/dsh-image-tools#v0.3.6
 ```
 
 ## 卸载
@@ -95,8 +95,10 @@ dsh plugin --profile web remove @dsh-external/dsh-image-tools
   （真实调用一次识图模型），点「完成，开始使用」后不再弹出（状态存 `~/.dsh/image-tools-state.json`）；
 - **故障自动自检**：`read_image` 被拦截、`image_recognize` 失败、图片落盘失败时，
   页面自动弹出自检面板：显示错误原因 + 一键运行自检（路由 / Key / 模型能力）+
-  重新测试连通性；
-- 以上 host 接口均做**回环地址 + Host 精确校验**，拒绝本机其他进程调用。
+  重新测试连通性（真实识图链路：内置测试图 → attachment → 模型读取校验）；
+- 以上 host 接口均做**回环地址 + Host 精确校验 + 随机页面令牌**（token 经
+  index.html 注入，每次重启变化，请求必须附带）三重校验，并限制请求方法
+  （GET 只读 / POST 才执行），本机其他进程无法预知令牌调用接口。
 
 ## 配置
 
