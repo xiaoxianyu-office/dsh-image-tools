@@ -1,7 +1,7 @@
 {
   "name": "@dsh-external/dsh-image-tools",
   "description": "Dynamic chat-image bridge, recognition tool, onboarding wizard and failure self-check for text-only models on DeepSeek Harness",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
